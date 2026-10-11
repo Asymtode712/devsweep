@@ -10,7 +10,7 @@ A disk cleaner for developers. devsweep finds the space your tooling quietly eat
 [![Go Reference](https://pkg.go.dev/badge/github.com/Asymtode712/devsweep.svg)](https://pkg.go.dev/github.com/Asymtode712/devsweep)
 [![Go version](https://img.shields.io/github/go-mod/go-version/Asymtode712/devsweep)](go.mod)
 
-[Website](https://asymtode712.github.io/devsweep/) · [Documentation](https://asymtode712.github.io/devsweep/docs.html) · [Report an issue](https://github.com/Asymtode712/devsweep/issues)
+[Website](https://devsweep.vercel.app) · [Documentation](https://devsweep.vercel.app/docs) · [Report an issue](https://github.com/Asymtode712/devsweep/issues)
 
 </div>
 
@@ -99,7 +99,7 @@ devsweep version
 | `--yes` | clean | Don't prompt (for scripts and cron) |
 | `--trash` | clean | Move to Trash instead of deleting (macOS, Linux) |
 
-Full reference with recipes: **[documentation](https://asymtode712.github.io/devsweep/docs.html#cli)**.
+Full reference with recipes: **[documentation](https://devsweep.vercel.app/docs#cli)**.
 
 ## Safety model
 
@@ -133,7 +133,7 @@ Every deletion is appended to `~/.local/state/devsweep/history.jsonl` (`%LOCALAP
 | **Android** | System images, AVDs, Flutter / Dart build output |
 | **Other** | CMake, Zig, .NET, Elixir, Haskell, Composer, Terraform, ccache / sccache, Bazel, Homebrew, JetBrains |
 
-Run `devsweep rules` for the full catalog, or browse it in the [docs](https://asymtode712.github.io/devsweep/docs.html#rules).
+Run `devsweep rules` for the full catalog, or browse it in the [docs](https://devsweep.vercel.app/docs#rules).
 
 ## How it works
 
@@ -158,4 +158,4 @@ make dist     # cross-compiled binaries in dist/
 make site     # regenerate the rule catalog and build the website (site/)
 ```
 
-The website is React + TypeScript (Vite) in [`site/`](site/). It's deployed to GitHub Pages by [`.github/workflows/pages.yml`](.github/workflows/pages.yml).
+The website is React + TypeScript (Vite) in [`site/`](site/). It's deployed on Vercel from the `site/` directory (see [`site/vercel.json`](site/vercel.json)). After changing rules, run `make site` and commit `site/src/data/rules.json`; CI fails if it's stale.

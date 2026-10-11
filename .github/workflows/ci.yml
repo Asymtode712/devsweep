@@ -28,6 +28,24 @@ jobs:
       - run: go test ./...
       - run: go build -o devsweep-bin .
 
+  rules-catalog:
+    # The website builds from the committed rule catalog; make sure it matches the code.
+    # macOS, because the catalog shows global paths as they resolve on a Mac.
+    name: Rule catalog is up to date
+    runs-on: macos-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-go@v5
+        with:
+          go-version-file: go.mod
+      - run: go run . rules --json > /tmp/rules.json
+      - name: Compare with site/src/data/rules.json
+        run: |
+          diff -u site/src/data/rules.json /tmp/rules.json || {
+            echo "::error::site/src/data/rules.json is stale. Run 'make site' and commit it."
+            exit 1
+          }
+
   site:
     name: Website
     runs-on: ubuntu-latest

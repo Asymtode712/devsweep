@@ -2,10 +2,9 @@ import { resolve } from "node:path";
 import { defineConfig } from "vite";
 import react from "@vitejs/plugin-react";
 
-// Two static entry pages, so the build works on any static host (GitHub Pages
-// included) without client-side routing. BASE_PATH is "/devsweep/" on Pages.
+// Two static entry pages (home and docs), so the build needs no client-side
+// routing and deploys as-is to Vercel or any static host.
 export default defineConfig({
-  base: process.env.BASE_PATH ?? "/",
   plugins: [react()],
   build: {
     rollupOptions: {
