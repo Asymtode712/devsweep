@@ -1,14 +1,11 @@
 import { useCallback, type ReactNode } from "react";
-import { DOCS_URL, HOME_URL, REPO, VERSION, doc } from "../site";
+import { DOCS_URL, HOME_URL, REPO, doc } from "../site";
 import { GitHubIcon, MoonIcon } from "./Icons";
 
 function useThemeToggle() {
   return useCallback(() => {
     const root = document.documentElement;
-    const dark = root.dataset.theme
-      ? root.dataset.theme === "dark"
-      : window.matchMedia("(prefers-color-scheme: dark)").matches;
-    root.dataset.theme = dark ? "light" : "dark";
+    root.dataset.theme = root.dataset.theme === "dark" ? "light" : "dark";
     try {
       localStorage.setItem("devsweep-theme", root.dataset.theme);
     } catch {
@@ -33,7 +30,6 @@ export function Header({ page }: HeaderProps) {
             <>
               <a href={DOCS_URL} className="hide-sm">Docs</a>
               <a href={doc("rules")} className="hide-sm">Rules</a>
-              <span className="pill hide-sm">v{VERSION}</span>
             </>
           )}
           <a href={REPO} className="icon-btn" aria-label="devsweep on GitHub">
